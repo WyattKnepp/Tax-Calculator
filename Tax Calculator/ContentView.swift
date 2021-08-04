@@ -17,7 +17,7 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 backgroundColor.ignoresSafeArea() // Ignores the spacing around the corners of the app
-                VStack{
+                VStack {
                     Text("Tax Calculator")
                         .font(.title)
                         .bold()
@@ -90,27 +90,32 @@ struct ContentView: View {
                     Text("Price")
                     TextFieldView(placeholder: "price", variable: $price) // TextField for inputing retail price
                     
-                    Button(action: {
-                        final = calculateFinal(tax: tax, price : price)
-                    })
-                    {
-                        Text("Calculate!") // Calculate Button
+                    /*                Button(action: {
+                     final = calculateFinal(tax: tax, price : price)
+                     })
+                     {
+                     */
+                    NavigationLink( // Navigates to a different view to show Total Price
+                        destination: VStack {
+                            Text("Total")
+                                .font(.largeTitle)
+                                .bold()
+                                .padding()
+                            Text("$\((calculateFinal(tax: tax, price: price)), specifier: "%.2f")")
+                        }) {
+                        Text("Calculate")
                             .foregroundColor(.white)
-                            .fontWeight(.bold)
                             .padding()
                             .frame(width: 200.0, height: 50.0)
                             .background(RoundedRectangle(cornerRadius: 10)
                                             .fill(Color.black)
-                                            .frame(width: 200, height: 50, alignment: .center)
-                            )
+                                            .frame(width: 200, height: 50, alignment: .center))
                     }
-                    Text("Total")
-                    Text("$\((final), specifier: "%.2f")")
-                    Spacer()
                 }
             }
         }
     }
+    
     
     func calculateFinal(tax : Double, price : String) -> Double { // Calculates final price
         if let currentPrice = Double(price){
