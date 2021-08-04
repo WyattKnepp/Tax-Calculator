@@ -89,12 +89,6 @@ struct ContentView: View {
                     
                     Text("Price")
                     TextFieldView(placeholder: "price", variable: $price) // TextField for inputing retail price
-                    
-                    /*                Button(action: {
-                     final = calculateFinal(tax: tax, price : price)
-                     })
-                     {
-                     */
                     NavigationLink( // Navigates to a different view to show Total Price
                         destination: VStack {
                             Text("Total")
@@ -115,7 +109,6 @@ struct ContentView: View {
             }
         }
     }
-    
     
     func calculateFinal(tax : Double, price : String) -> Double { // Calculates final price
         if let currentPrice = Double(price){
