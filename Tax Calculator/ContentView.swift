@@ -5,7 +5,6 @@
 //  Created by Wyatt Knepp on 8/4/21.
 //
 
-
 import SwiftUI
 
 struct ContentView: View {
@@ -93,7 +92,7 @@ struct ContentView: View {
 					TextFieldView(placeholder: "price", variable: $price) // TextField for inputing retail price
 						.onChange(of: price, perform: { value in
 							if let value = Int(value) {
-								priceStored = "\(value)"
+								priceStored = "\(value)" // If a letter is in the textfield, it deletes
 							}
 							else {
 								price = "\(priceStored)"
@@ -107,16 +106,10 @@ struct ContentView: View {
 									.font(.largeTitle)
 									.bold()
 									.padding()
-								Text("$\((calculateFinal(tax: tax, price: price)), specifier: "%.2f")")
+								Text("$\((calculateFinal(tax: tax, price: price)), specifier: "%.2f")") // Displays the calculated final total
 							}
 						}) {
-						Text("Calculate")
-							.foregroundColor(.white)
-							.padding()
-							.frame(width: 200.0, height: 50.0)
-							.background(RoundedRectangle(cornerRadius: 10)
-									.fill(Color.black)
-									.frame(width: 200, height: 50, alignment: .center))
+						CustomCalculateText(text: "Calculate") // Calculate Button
 					}
 				}
 			}
@@ -153,4 +146,17 @@ struct TextFieldView: View { // TextField for retail price
 			.padding()
 		
 	}
+}
+
+struct CustomCalculateText: View { // Connects to Calculate button text
+    let text: String
+    var body: some View {
+        Text(text)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 200.0, height: 50.0)
+            .background(RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.black)
+                    .frame(width: 200, height: 50, alignment: .center))
+    }
 }
