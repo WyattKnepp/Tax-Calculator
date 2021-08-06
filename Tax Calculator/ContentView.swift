@@ -95,7 +95,11 @@ struct ContentView: View {
                                 priceStored = "\(value)" // If a letter is in the textfield, it deletes
                             }
                             else {
-                                price = "\(priceStored)"
+                                if value == "" {
+                                    priceStored = "\(value)"
+                                } else {
+                                    price = "\(priceStored)"
+                                }
                             }
                         })
                     NavigationLink( // Navigates to a different view to show Total Price
